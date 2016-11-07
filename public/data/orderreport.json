@@ -1,0 +1,133 @@
+{
+    "title": "New Report",
+    "version": "1.4.60",
+    "type": "hierarchical",
+    "page": {
+        "units": "inches",
+        "paper_size": {
+            "inches": [
+                "8.5",
+                "11"
+            ],
+            "mm": [
+                "216",
+                "279"
+            ]
+        },
+        "margins": {
+            "top": 0.5,
+            "left": 0.5,
+            "right": 0.5,
+            "bottom": 0.5
+        }
+    },
+    "filters": [],
+    "inputs": [],
+    "body": {
+        "data_source": "orders",
+        "show_detail": true,
+        "elements": [
+            {
+                "left": 0,
+                "top": 0,
+                "width": 2,
+                "height": 0.5,
+                "visible": true,
+                "type": "text",
+                "text": "[userName]",
+                "fit_content": "vertical",
+                "id": "jsr-auto-id-3"
+            },
+            {
+                "left": 2.1312746062992125,
+                "top": 0.029935100885826772,
+                "width": 1,
+                "height": 0.25,
+                "visible": true,
+                "type": "text",
+                "text": "[orderDate]",
+                "fit_content": "vertical",
+                "id": "jsr-auto-id-4",
+                "pattern": "M/D/YY"
+            },
+            {
+                "left": 3.5063284325787403,
+                "top": 0.029935100885826772,
+                "width": 1,
+                "height": 0.25,
+                "visible": true,
+                "type": "text",
+                "text": "[orderTotal]",
+                "fit_content": "vertical",
+                "id": "jsr-auto-id-5",
+                "pattern": "$#,##0.00",
+                "align": "right"
+            }
+        ],
+        "sublevels": [
+            {
+                "data_source": "__parentgroup",
+                "group_by": "accountType",
+                "sort_by": "accountType",
+                "sort_dir": "desc",
+                "header": {
+                    "visible": true,
+                    "height": 0.35,
+                    "elements": [
+                        {
+                            "left": 0,
+                            "top": 0,
+                            "width": 2,
+                            "height": 0.5,
+                            "visible": true,
+                            "type": "text",
+                            "text": "[accountType] Accounts:",
+                            "fit_content": "vertical",
+                            "id": "jsr-auto-id-1"
+                        }
+                    ]
+                },
+                "footer": {
+                    "visible": true,
+                    "height": 0.5,
+                    "elements": [
+                        {
+                            "left": 5.006351500984252,
+                            "top": 0.029935100885826772,
+                            "width": 2.250492125984252,
+                            "height": 0.25098425196850394,
+                            "visible": true,
+                            "type": "text",
+                            "text": "Total: [SUM(orderTotal)]",
+                            "fit_content": "vertical",
+                            "id": "jsr-auto-id-2",
+                            "pattern": "$#,##0.00",
+                            "align": "right",
+                            "bold": true
+                        }
+                    ]
+                }
+            }
+        ],
+        "column_count": 1,
+        "pivot_enabled": false,
+        "pivot_expression": "",
+        "pivot_column_sort_by": "",
+        "pivot_column_bucket_type": "",
+        "pivot_value_aggregate": "",
+        "pivot_column_left": 3.325,
+        "pivot_column_right": 4.175000000000001,
+        "pivot_area_right": 5.449999999999999
+    },
+    "page_header": {
+        "visible": false,
+        "elements": [],
+        "height": 1
+    },
+    "page_footer": {
+        "visible": false,
+        "elements": [],
+        "height": 1
+    },
+    "id": "jsr-auto-id-1"
+}

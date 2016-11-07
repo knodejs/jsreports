@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
     var orderData = [{
         "userId": "1X39AN4Z92Y",
@@ -39,14 +39,23 @@ $(document).ready(function () {
         }]
     };
 
-    var dataSource = {
-        id: "orders",   // Internal reference ID
-        name: "Orders",  // Data source name shown to report designer
-        data: orderData,
-        schema: orderSchema
-    };
+    var data_sources = [{
+        "id": "orders",
+        "name": "Orders",
+        "data": orderData,
+        "schema": orderSchema
+    }];
 
-    // Create a report definition
+    // Load the report definition from WEB API
+    $.getJSON("data/orderreport.json", function(report_def) {
+        console.log(report_def);
+        renderDesigner(report_def);
+        refreshPreview(report_def);
+    });
+
+
+    //initial/init from ui// save schema def blank template js report
+    /*
     var report = jsreports.createReport()
         .data('orders')
         .groupBy('accountType', 'accountType', 'desc')
@@ -68,38 +77,35 @@ $(document).ready(function () {
             align: 'right'
         })
         .done();
+    */
 
-    // Render the report
-    // jsreports.render({
-    //     report_def: report,
-    //     target: $('.report_preview').css('min-height', '500px'),
-    //     datasets: [dataSource]
-    // });
 
-    var data_sources = [{
-        "id": "orders",
-        "name": "Orders",
-        "data": orderData,
-        "schema": orderSchema
-    }];
 
-    var designer = new jsreports.Designer({
-        embedded: true,
-        container: $(".report-designer-container").css('min-height', '500px'),
-        data_sources: data_sources,
-        report_def: report,
-        layout: "horizontal"
-    });
 
-    $(designer).on("save", function (evt, reportdef) {
-        console.log(reportdef);
-        report_def = JSON.parse(reportdef);
+    var renderDesigner = function(report_def) {
+        var designer = new jsreports.Designer({
+            embedded: true,
+            container: $(".report-designer").css('min-height', '500px'),
+            data_sources: data_sources,
+            report_def: report_def,
+            layout: "horizontal"
+        });
+
+        $(designer).on("save", function(evt, reportdef) {
+            console.log(reportdef);
+            report_def = JSON.parse(reportdef);
+            //POST TO WEB API
+            //update preview
+            refreshPreview(report_def);
+        });
+    };
+    var refreshPreview = function(report_def) {
+        
         $(".report_preview").empty();
         jsreports.render({
             report_def: report_def,
             target: $(".report_preview").css('min-height', '500px'),
             datasets: data_sources
         });
-    });
-
+    };
 });
