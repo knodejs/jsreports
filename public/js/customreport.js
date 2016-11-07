@@ -47,6 +47,7 @@ $(document).ready(function() {
     }];
 
     // Load the report definition from WEB API
+    //TODO
     $.getJSON("data/orderreport.json", function(report_def) {
         console.log(report_def);
         renderDesigner(report_def);
@@ -94,6 +95,7 @@ $(document).ready(function() {
         $(designer).on("save", function(evt, reportdef) {
             console.log(reportdef);
             report_def = JSON.parse(reportdef);
+            //TODO
             //POST TO WEB API
             //update preview
             refreshPreview(report_def);
