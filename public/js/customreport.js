@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     var orderData = [{
+        "rtoName": "RTO NO ploblem First",
         "userId": "1X39AN4Z92Y",
         "userName": "John Smith",
         "accountType": "INDIVIDUAL",
@@ -13,6 +14,7 @@ $(document).ready(function() {
         "orderTotal": 180.50,
         "orderDate": "2016-02-25"
     }, {
+        "rtoName": "RTO NO ploblem Last",
         "userId": "1CM499NA94R",
         "userName": "Becky Sanderson",
         "accountType": "BUSINESS",
@@ -36,11 +38,14 @@ $(document).ready(function() {
         }, {
             name: "orderDate",
             type: "date"
+        }, {
+            name: "rtoName",
+            type: "text"
         }]
     };
 
     var data_sources = [{
-        "id": "orders",
+        "id": "Orders",
         "name": "Orders",
         "data": orderData,
         "schema": orderSchema
@@ -48,39 +53,68 @@ $(document).ready(function() {
 
     // Load the report definition from WEB API
     //TODO
-    $.getJSON("data/orderreport.json", function(report_def) {
-        console.log(report_def);
-        renderDesigner(report_def);
-        refreshPreview(report_def);
-    });
+    // $.getJSON("data/orderreport.json", function(report_def) {
+    //     console.log(report_def);
+    //     renderDesigner(report_def);
+    //     refreshPreview(report_def);
+    // });
 
 
     //initial/init from ui// save schema def blank template js report
-    /*
+
     var report = jsreports.createReport()
         .data('orders')
-        .groupBy('accountType', 'accountType', 'desc')
-        .header(0.35)
-        .text('[accountType] Accounts:')
-        .footer(0.5)
-        .text('Total: [SUM(orderTotal)]', 2, 0, 2, 0.25, {
-            pattern: '$#,##0.00',
-            align: 'right',
-            bold: true
-        })
-        .detail()
-        .text('[userName]')
-        .text('[orderDate]', 1.75, 0, 1, 0.25, {
-            pattern: 'M/D/YY'
-        })
-        .text('[orderTotal]', 3, 0, 1, 0.25, {
-            pattern: '$#,##0.00',
-            align: 'right'
-        })
+        .header(1.0)
+        .detail(0.3)
+        .footer(1.0)
         .done();
-    */
 
+    var designer = new jsreports.Designer({
+        embedded: true,
+        container: $(".report-designer").css('min-height', '500px'),
+        data_sources: data_sources,
+        report_def: report,
+        layout: "horizontal"
+    });
 
+    jsreports.libraryPath = "lib/jsreports";
+
+    $(document).ready(function() {
+        $(designer).on("save", function(evt, reportdef) {
+            console.log(reportdef)
+            preview(reportdef);
+        });
+
+        $(designer).on("render", function() {
+            console.log('render designer')
+            var btnRight = designer.addToolbarButton("New Button Right");
+            $(btnRight).on("click", function() {
+                alert("Right button clicked");
+            });
+
+            /** Add an arbitrary HTML element, here a container into which we'll append a drop-down */
+            var span = designer.addToolbarElement('<span></span>', jsreports.ToolbarItemPosition.LEFT);
+            var select = $('<select><option value="1">Option 1</option><option value="2">Option 2</option></select>');
+            $(span).append(select).addClass('toolbar-dropdown');
+            $(select).on("change", function() {
+                alert("Selected " + $(this).val());
+            });
+
+            var btnLeft = designer.addToolbarButton("New Button Left", jsreports.ToolbarItemPosition.LEFT);
+            $(btnLeft).on("click", function() {
+                alert("Left button clicked");
+            });
+        });
+    });
+
+    function preview(reportdef) {
+        report_def = JSON.parse(reportdef);
+        jsreports.render({
+            report_def: report_def,
+            target: $(".report_preview").css('min-height', '500px'),
+            datasets: data_sources
+        });
+    }
 
 
     var renderDesigner = function(report_def) {
@@ -102,7 +136,7 @@ $(document).ready(function() {
         });
     };
     var refreshPreview = function(report_def) {
-        
+
         $(".report_preview").empty();
         jsreports.render({
             report_def: report_def,

@@ -26,8 +26,7 @@
     "body": {
         "data_source": "orders",
         "show_detail": true,
-        "elements": [
-            {
+        "elements": [{
                 "left": 0,
                 "top": 0,
                 "width": 2,
@@ -64,51 +63,45 @@
                 "align": "right"
             }
         ],
-        "sublevels": [
-            {
-                "data_source": "__parentgroup",
-                "group_by": "accountType",
-                "sort_by": "accountType",
-                "sort_dir": "desc",
-                "header": {
-                    "visible": true,
-                    "height": 0.35,
-                    "elements": [
-                        {
-                            "left": 0,
-                            "top": 0,
-                            "width": 2,
-                            "height": 0.5,
-                            "visible": true,
-                            "type": "text",
-                            "text": "[accountType] Accounts:",
-                            "fit_content": "vertical",
-                            "id": "jsr-auto-id-1"
-                        }
-                    ]
-                },
-                "footer": {
-                    "visible": true,
+        "sublevels": [{
+            "data_source": "__parentgroup",
+            "group_by": "accountType",
+            "sort_by": "accountType",
+            "sort_dir": "desc",
+            "header": {
+                "visible": true,
+                "height": 0.35,
+                "elements": [{
+                    "left": 0,
+                    "top": 0,
+                    "width": 2,
                     "height": 0.5,
-                    "elements": [
-                        {
-                            "left": 5.006351500984252,
-                            "top": 0.029935100885826772,
-                            "width": 2.250492125984252,
-                            "height": 0.25098425196850394,
-                            "visible": true,
-                            "type": "text",
-                            "text": "Total: [SUM(orderTotal)]",
-                            "fit_content": "vertical",
-                            "id": "jsr-auto-id-2",
-                            "pattern": "$#,##0.00",
-                            "align": "right",
-                            "bold": true
-                        }
-                    ]
-                }
+                    "visible": true,
+                    "type": "text",
+                    "text": "[accountType] Accounts:",
+                    "fit_content": "vertical",
+                    "id": "jsr-auto-id-1"
+                }]
+            },
+            "footer": {
+                "visible": true,
+                "height": 0.5,
+                "elements": [{
+                    "left": 5.006351500984252,
+                    "top": 0.029935100885826772,
+                    "width": 2.250492125984252,
+                    "height": 0.25098425196850394,
+                    "visible": true,
+                    "type": "text",
+                    "text": "Total: [SUM(orderTotal)]",
+                    "fit_content": "vertical",
+                    "id": "jsr-auto-id-2",
+                    "pattern": "$#,##0.00",
+                    "align": "right",
+                    "bold": true
+                }]
             }
-        ],
+        }],
         "column_count": 1,
         "pivot_enabled": false,
         "pivot_expression": "",

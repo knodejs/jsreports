@@ -1,17 +1,17 @@
 {
-    "name": "podium_demo",
-    "version": "1.0.0",
-    "description": "demmo save/render/design js report",
-    "main": "server.js",
-    "scripts": {
-        "start": "node server"
-    },
-    "engines": {
-        "node": ">=0.12.4"
-    },
-    "author": "Narongchai Thongkongkeaw",
-    "dependencies": {
-        "express": "^4.14.0",
-        "nodemon": "^1.11.0"
-    }
+  "name": "podium_demo",
+  "version": "1.0.0",
+  "description": "demmo save/render/design js report",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server"
+  },
+  "engines": {
+    "node": ">=0.12.4"
+  },
+  "author": "Narongchai Thongkongkeaw",
+  "dependencies": {
+    "express": "^4.14.0",
+    "nodemon": "^1.11.0"
+  }
 }
